@@ -1,0 +1,35 @@
+version: '2'
+services:
+
+  mysql:
+    container_name: mysql
+    image: mysql:5.7.23
+    restart: always
+    environment:
+      MYSQL_DATABASE : database
+      MYSQL_USER: user
+      MYSQL_PASSWORD: password
+      MYSQL_ROOT_PASSWORD: password
+    volumes:
+      - ./.mysql:/var/lib/mysql
+      #- ./init_sql:/docker-entrypoint-initdb.d
+    network_mode: bridge
+
+  web:
+    container_name: web
+    image: mindengineering/amp-stack:php7.0
+    depends_on:
+      - mysql
+    restart: always
+    hostname: my.localhost
+    links:
+      - mysql:mysql
+    volumes:
+      - ./public_html:/var/www/html
+    environment:
+      VIRTUAL_HOST: my.localhost
+      APACHE_PUBLIC_DIRECTORY: /var/www/html
+    #ports:
+    #  - 80:80
+    #  - 587:587
+    network_mode: bridge
