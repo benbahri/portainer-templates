@@ -1,8 +1,8 @@
 version: '2'
 services:
 
-  mysql:
-    container_name: mysql
+  $PROJECT_NAME_mysql:
+    container_name: $PROJECT_NAME_mysql
     image: mysql:5.7.23
     restart: always
     environment:
@@ -11,21 +11,21 @@ services:
       MYSQL_PASSWORD: $MYSQL_PASSWORD
       MYSQL_ROOT_PASSWORD: $MYSQL_ROOT_PASSWORD
     volumes:
-      - ./.mysql:/var/lib/mysql
-      #- ./init_sql:/docker-entrypoint-initdb.d
+      - $PATH/$PROJECT_NAME/.mysql:/var/lib/mysql
+      #- $PATH/$PROJECT_NAME//init_sql:/docker-entrypoint-initdb.d
     network_mode: bridge
 
-  web:
+  $PROJECT_NAME_web:
     container_name: web
     image: mindengineering/amp-stack:php7.0
     depends_on:
-      - mysql
+      - $PROJECT_NAME_mysql
     restart: always
     hostname: $VIRTUAL_HOST
     links:
-      - mysql:mysql
+      - $PROJECT_NAME_mysql:mysql
     volumes:
-      - ./public_html:/var/www/html
+      - $PATH/$PROJECT_NAME/public_html:/var/www/html
     environment:
       VIRTUAL_HOST: $VIRTUAL_HOST
       APACHE_PUBLIC_DIRECTORY: $APACHE_PUBLIC_DIRECTORY
