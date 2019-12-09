@@ -28,8 +28,10 @@ services:
       - $PATH/$PROJECT_NAME/public_html:/var/www/html
     environment:
       VIRTUAL_HOST: $VIRTUAL_HOST
+      #LETSENCRYPT_HOST: $APACHE_PUBLIC_DIRECTORY
+      #LETSENCRYPT_EMAIL: mindengineering.tn@gmail.com
       APACHE_PUBLIC_DIRECTORY: $APACHE_PUBLIC_DIRECTORY
-    ports:
-      - 80:80
-      - 587:587
+    #ports:
+    #  - 80:80
+    #  - 587:587
     network_mode: bridge
