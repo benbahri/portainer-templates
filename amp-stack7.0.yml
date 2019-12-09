@@ -19,7 +19,7 @@ services:
     #container_name: web
     image: mindengineering/amp-stack:php7.0
     depends_on:
-      - $PROJECT_NAME_mysql
+      - mysql
     restart: always
     hostname: $VIRTUAL_HOST
     links:
