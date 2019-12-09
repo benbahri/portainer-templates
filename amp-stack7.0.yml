@@ -29,7 +29,7 @@ services:
     environment:
       VIRTUAL_HOST: $VIRTUAL_HOST
       APACHE_PUBLIC_DIRECTORY: $APACHE_PUBLIC_DIRECTORY
-    #ports:
-    #  - 80:80
-    #  - 587:587
+    ports:
+      - 80:80
+      - 587:587
     network_mode: bridge
