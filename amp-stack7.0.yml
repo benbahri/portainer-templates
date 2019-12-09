@@ -6,10 +6,10 @@ services:
     image: mysql:5.7.23
     restart: always
     environment:
-      MYSQL_DATABASE : database
-      MYSQL_USER: user
-      MYSQL_PASSWORD: password
-      MYSQL_ROOT_PASSWORD: password
+      MYSQL_DATABASE : $MYSQL_DATABASE
+      MYSQL_USER: $MYSQL_USER
+      MYSQL_PASSWORD: $MYSQL_PASSWORD
+      MYSQL_ROOT_PASSWORD: $MYSQL_ROOT_PASSWORD
     volumes:
       - ./.mysql:/var/lib/mysql
       #- ./init_sql:/docker-entrypoint-initdb.d
@@ -21,14 +21,14 @@ services:
     depends_on:
       - mysql
     restart: always
-    hostname: my.localhost
+    hostname: $VIRTUAL_HOST
     links:
       - mysql:mysql
     volumes:
       - ./public_html:/var/www/html
     environment:
-      VIRTUAL_HOST: my.localhost
-      APACHE_PUBLIC_DIRECTORY: /var/www/html
+      VIRTUAL_HOST: $VIRTUAL_HOST
+      APACHE_PUBLIC_DIRECTORY: $APACHE_PUBLIC_DIRECTORY
     #ports:
     #  - 80:80
     #  - 587:587
