@@ -11,8 +11,8 @@ services:
       - /etc/nginx/conf.d
       - /etc/nginx/vhost.d
       - /usr/share/nginx/html
-      - ./certs:/etc/nginx/certs:ro
-      - ./my_proxy.conf:/etc/nginx/conf.d/my_proxy.conf
+      - $PATH/$PROJECT_NAME/certs:/etc/nginx/certs:ro
+      - $PATH/$PROJECT_NAME/nginx_ssl.conf:/etc/nginx/conf.d/my_proxy.conf
     labels:
       - "com.github.jrcs.letsencrypt_nginx_proxy_companion.nginx_proxy"
     network_mode: bridge
@@ -26,7 +26,7 @@ services:
     volumes_from:
       - nginx
     volumes:
-      - ./nginx.tmpl:/etc/docker-gen/templates/nginx.tmpl:ro
+      - $PATH/$PROJECT_NAME/nginx_ssl.conf:/etc/docker-gen/templates/nginx.tmpl:ro
       - /var/run/docker.sock:/tmp/docker.sock:ro
     labels:
       - "com.github.jrcs.letsencrypt_nginx_proxy_companion.docker_gen"
@@ -42,6 +42,6 @@ services:
     volumes_from:
       - nginx
     volumes:
-      - ./certs:/etc/nginx/certs:rw
+      - $PATH/$PROJECT_NAME/certs:/etc/nginx/certs:rw
       - /var/run/docker.sock:/var/run/docker.sock:ro
     network_mode: bridge
