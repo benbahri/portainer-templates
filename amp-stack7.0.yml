@@ -17,7 +17,7 @@ services:
 
   web:
     #container_name: web
-    image: mindengineering/amp-stack:php$PHP_VERSION
+    image: mindengineering/amp-stack$PHP_VERSION
     depends_on:
       - mysql
     restart: unless-stopped
