@@ -1,8 +1,8 @@
 version: '2'
 services:
 
-  $PROJECT_NAME_mysql:
-    container_name: $PROJECT_NAME_mysql
+  mysql:
+    #container_name: $PROJECT_NAME_mysql
     image: mysql:5.7.23
     restart: always
     environment:
@@ -15,15 +15,15 @@ services:
       #- $PATH/$PROJECT_NAME//init_sql:/docker-entrypoint-initdb.d
     network_mode: bridge
 
-  $PROJECT_NAME_web:
-    container_name: web
+  web:
+    #container_name: web
     image: mindengineering/amp-stack:php7.0
     depends_on:
       - $PROJECT_NAME_mysql
     restart: always
     hostname: $VIRTUAL_HOST
     links:
-      - $PROJECT_NAME_mysql:mysql
+      - mysql:mysql
     volumes:
       - $PATH/$PROJECT_NAME/public_html:/var/www/html
     environment:
