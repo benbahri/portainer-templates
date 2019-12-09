@@ -4,7 +4,7 @@ services:
   mysql:
     #container_name: $PROJECT_NAME_mysql
     image: mysql:5.7.23
-    restart: always
+    restart: unless-stopped
     environment:
       MYSQL_DATABASE : $MYSQL_DATABASE
       MYSQL_USER: $MYSQL_USER
@@ -20,7 +20,7 @@ services:
     image: mindengineering/amp-stack:php7.0
     depends_on:
       - mysql
-    restart: always
+    restart: unless-stopped
     hostname: $VIRTUAL_HOST
     links:
       - mysql:mysql
