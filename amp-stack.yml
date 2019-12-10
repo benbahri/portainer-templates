@@ -1,7 +1,7 @@
 version: '2'
 services:
   mysql:
-    image: mysql$MYSQL_VERSION
+    image: mysql:$MYSQL_V
     restart: $RESTART_POLICY
     environment:
       MYSQL_DATABASE : $MYSQL_DATABASE
@@ -13,7 +13,7 @@ services:
       #- $PATH/$PROJECT_NAME//init_sql:/docker-entrypoint-initdb.d
     network_mode: bridge
   web:
-    image: mindengineering/amp-stack$PHP_VERSION
+    image: mindengineering/amp-stack:$PHP_V
     depends_on:
       - mysql
     restart: $RESTART_POLICY
