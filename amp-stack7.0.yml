@@ -9,7 +9,7 @@ services:
       MYSQL_PASSWORD: $MYSQL_PASSWORD
       MYSQL_ROOT_PASSWORD: $MYSQL_ROOT_PASSWORD
     volumes:
-      - $PATH/mysql:/var/lib/mysql
+      - /home/webmaster/$VIRTUAL_HOST/mysql:/var/lib/mysql
       #- $PATH/$PROJECT_NAME//init_sql:/docker-entrypoint-initdb.d
     network_mode: bridge
   web:
@@ -21,7 +21,7 @@ services:
     links:
       - mysql:mysql
     volumes:
-      - $PATH/public_html:/var/www/html
+      - /home/webmaster/$VIRTUAL_HOST/public_html:/var/www/html
     environment:
       VIRTUAL_HOST: $VIRTUAL_HOST
       #LETSENCRYPT_HOST: $APACHE_PUBLIC_DIRECTORY
