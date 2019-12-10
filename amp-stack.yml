@@ -2,7 +2,7 @@ version: '2'
 services:
   mysql:
     image: mysql:$MYSQL_V
-    restart: $RESTART_POLICY
+    restart: unless-stopped
     environment:
       MYSQL_DATABASE : $MYSQL_DATABASE
       MYSQL_USER: $MYSQL_USER
@@ -16,7 +16,7 @@ services:
     image: mindengineering/amp-stack:$PHP_V
     depends_on:
       - mysql
-    restart: $RESTART_POLICY
+    restart: unless-stopped
     hostname: $VIRTUAL_HOST
     links:
       - mysql:mysql
