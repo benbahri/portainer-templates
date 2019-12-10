@@ -1,7 +1,7 @@
 version: '2'
 services:
   mysql:
-    image: mysql:5.7.23
+    image: mysql$MYSQL_VERSION
     restart: unless-stopped
     environment:
       MYSQL_DATABASE : $MYSQL_DATABASE
