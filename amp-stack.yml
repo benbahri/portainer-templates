@@ -1,4 +1,7 @@
 version: '2'
+volumes:
+    mysql_data: {}
+    web_data: {}
 services:
   mysql:
     image: mysql:$MYSQL_V
@@ -9,7 +12,7 @@ services:
       MYSQL_PASSWORD: $MYSQL_PASSWORD
       MYSQL_ROOT_PASSWORD: $MYSQL_ROOT_PASSWORD
     volumes:
-      - /home/webmaster/tpl/mysql_data:/var/lib/mysql
+      - mysql_data:/var/lib/mysql
       #- $PATH/$PROJECT_NAME/init_sql:/docker-entrypoint-initdb.d
     network_mode: bridge
   web:
@@ -21,7 +24,7 @@ services:
     links:
       - mysql:mysql
     volumes:
-      - /home/webmaster/tpl/:/var/www/html
+      - web_data:/var/www/html
     environment:
       VIRTUAL_HOST: $VIRTUAL_HOST
       #LETSENCRYPT_HOST: $APACHE_PUBLIC_DIRECTORY
