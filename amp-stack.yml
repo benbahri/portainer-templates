@@ -1,4 +1,4 @@
-version: '2'
+version: '3.3'
 services:
   mysql:
     image: mysql:$MYSQL_V
@@ -9,8 +9,8 @@ services:
       MYSQL_PASSWORD: $MYSQL_PASSWORD
       MYSQL_ROOT_PASSWORD: $MYSQL_ROOT_PASSWORD
     volumes:
-      - /home/webmaster/$VIRTUAL_HOST/mysql:/var/lib/mysql
-      #- $PATH/$PROJECT_NAME//init_sql:/docker-entrypoint-initdb.d
+      - mysql_data:/var/lib/mysql
+      #- $PATH/$PROJECT_NAME/init_sql:/docker-entrypoint-initdb.d
     network_mode: bridge
   web:
     image: mindengineering/amp-stack:$PHP_V
@@ -21,7 +21,7 @@ services:
     links:
       - mysql:mysql
     volumes:
-      - /home/webmaster/$VIRTUAL_HOST/public_html:/var/www/html
+      - web_data:/var/www/html
     environment:
       VIRTUAL_HOST: $VIRTUAL_HOST
       #LETSENCRYPT_HOST: $APACHE_PUBLIC_DIRECTORY
@@ -31,3 +31,6 @@ services:
     #  - 80:80
     #  - 587:587
     network_mode: bridge
+volumes:
+    mysql_data:
+    web_data:
