@@ -25,6 +25,7 @@ services:
       - mysql:mysql
     volumes:
       - web_data:/var/www/html
+    user: www-data
     environment:
       VIRTUAL_HOST: $VIRTUAL_HOST
       #LETSENCRYPT_HOST: $APACHE_PUBLIC_DIRECTORY
